@@ -33,7 +33,7 @@ int pop(struct Stack **top){
 
 int display(struct Stack *top){
     if (top == NULL)
-        printf("\nCan't display - Empty stack!!\n");
+        printf("\nEmpty stack!!\n");
     else{
         printf("The stack is:\n");
         while (top!= NULL)
