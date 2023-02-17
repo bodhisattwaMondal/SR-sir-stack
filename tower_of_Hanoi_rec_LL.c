@@ -17,7 +17,6 @@ void push(struct Stack **top, int item)
     // pushing new node into the stack
     newNode->next = *top;
     *top = newNode;
-    // printf("Node succesfully inserted!!");
 }
 
 int pop(struct Stack **top)
@@ -57,18 +56,18 @@ int display(struct Stack *top)
 // {
 //     if (disk == 1)
 //     {
-//         // Moving the largest disk from source to destination
+        // Moving the largest disk from source to destination
 //         push(destTop, pop(srcTop));
 //         return;
 //     }
 
-//     // Moving n-1 disks from source to aux using destination stack
+    // Moving n-1 disks from source to aux using destination stack
 //     toH(disk - 1, srcTop, destTop, auxTop);
 
-//     // Moving the largest disk from source to destination
+    // Moving the largest disk from source to destination
 //     push(destTop, pop(srcTop));
 
-//     // Moving n-1 disks from aux to destination using source stack
+    // Moving n-1 disks from aux to destination using source stack
 //     toH(disk - 1, auxTop, srcTop, destTop);
 // }
 
@@ -87,6 +86,7 @@ void toH(int disk, struct Stack **srcTop, struct Stack **auxTop, struct Stack **
     toH(disk - 1, srcTop, destTop, auxTop, S, D, A);
 
     printf("%c -> %c\n", S, D);
+    
     // Moving the largest disk from source to destination
     push(destTop, pop(srcTop));
 
