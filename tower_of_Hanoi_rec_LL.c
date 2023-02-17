@@ -50,25 +50,50 @@ int display(struct Stack *top)
     }
 }
 
-// Tower of Hanoi Algorithm (recursive)
-void toH(int disk, struct Stack **srcTop, struct Stack **auxTop, struct Stack **destTop)
+//----------------------- Tower of Hanoi Algorithm (recursive) -----------------------
+
+// Moves will not be displayed
+// void toH(int disk, struct Stack **srcTop, struct Stack **auxTop, struct Stack **destTop)
+// {
+//     if (disk == 1)
+//     {
+//         // Moving the largest disk from source to destination
+//         push(destTop, pop(srcTop));
+//         return;
+//     }
+
+//     // Moving n-1 disks from source to aux using destination stack
+//     toH(disk - 1, srcTop, destTop, auxTop);
+
+//     // Moving the largest disk from source to destination
+//     push(destTop, pop(srcTop));
+
+//     // Moving n-1 disks from aux to destination using source stack
+//     toH(disk - 1, auxTop, srcTop, destTop);
+// }
+
+// Moves will be diplayed 
+void toH(int disk, struct Stack **srcTop, struct Stack **auxTop, struct Stack **destTop, char S, char A, char D)
 {
     if (disk == 1)
     {
         // Moving the largest disk from source to destination
+        printf("%c -> %c\n", S, D);
         push(destTop, pop(srcTop));
         return;
     }
 
     // Moving n-1 disks from source to aux using destination stack
-    toH(disk - 1, srcTop, destTop, auxTop);
+    toH(disk - 1, srcTop, destTop, auxTop, S, D, A);
 
+    printf("%c -> %c\n", S, D);
     // Moving the largest disk from source to destination
     push(destTop, pop(srcTop));
 
     // Moving n-1 disks from aux to destination using source stack
-    toH(disk - 1, auxTop, srcTop, destTop);
+    toH(disk - 1, auxTop, srcTop, destTop, A, S, D);
 }
+
 
 // Driver Code
 int main()
@@ -82,6 +107,7 @@ int main()
     // Creating empty Destination Stack
     struct Stack *destTop = NULL;
 
+
     // Inserting n disk(s) in the source stack with value as their number
     int noOfDisk = 0;
     printf("Enter the number of disks: ");
@@ -91,7 +117,8 @@ int main()
         push(&srcTop,i);
     }
 
-    // Displaying Stacks
+    // Displaying Stacks before implementing toH
+    printf("\nBefore implementing tower of Hanoi\n");
     printf("\nSource Stack : \n");
     display(srcTop);
 
@@ -102,10 +129,12 @@ int main()
     display(destTop);
 
     // Applying Tower Of Hanoi Algorithm
-    printf("\n..............Implementing Tower of Hanoi\n");
-    toH(noOfDisk, &srcTop, &auxTop, &destTop);
+    printf("\n.......................\nImplementing Tower of Hanoi\n.......................\n");
+    printf("\nMoves:\n");
+    toH(noOfDisk, &srcTop, &auxTop, &destTop, 'S', 'A', 'D'); // showing moves
+    // toH(noOfDisk, &srcTop, &auxTop, &destTop); // not showing moves
 
-    // Displaying Stacks
+    // Displaying Stacks after implementing toH
     printf("\nSource Stack : \n");
     display(srcTop);
 
